@@ -31,10 +31,9 @@ function TabNavigator() {
     <Navigator
       initialRouteName="Feed"
       backBehavior="initialRoute"
-      headerMode="none"
-      // tabBarOptions={{
-      //   keyboardHidesTabBar: true
-      // }}
+      screenOptions={{
+        headerShown: false
+      }}
       tabBar={(tabBarProps) => (
         <BottomTabBar
           visible={Platform.OS === 'android' ? visible : true}

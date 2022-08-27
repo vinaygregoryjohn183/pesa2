@@ -41,7 +41,7 @@ const BottomTabBar = (props: any) => {
         };
 
         const tabBarItem = (
-          <View style={{ alignItems: 'center' }}>
+          <View style={{ alignItems: 'center' }} key={index}>
             <TabIcon
               focused={isFocused}
               color={'#311B92'}
