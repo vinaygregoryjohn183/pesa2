@@ -8,7 +8,7 @@ const Milestone = () => {
   const [currentMilestone, setCurrentmilestone] = useState<any>({});
   const [amountAchieved, setAmountAchieved] = useState();
 
-  const getMilestones = async () => {
+  const getCurrentMilestone = async () => {
     console.log('fetching.....');
     const currMile = await fetch('https://211b-103-142-31-94.in.ngrok.io/api/v1/milestone/current-milestone/d89e855f-11a9-454e-ac83-51b28cb820be', { method: 'GET' });
     return currMile.json();
@@ -21,7 +21,7 @@ const Milestone = () => {
   };
 
   useEffect(() => {
-      getMilestones().then(data => {
+    getCurrentMilestone().then(data => {
         setCurrentmilestone({
           type: data.type,
           amount: data.amount
