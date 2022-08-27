@@ -29,7 +29,7 @@ function TabNavigator() {
 
   return (
     <Navigator
-      initialRouteName="Home"
+      initialRouteName="Feed"
       backBehavior="initialRoute"
       headerMode="none"
       // tabBarOptions={{
@@ -53,7 +53,7 @@ function TabNavigator() {
             );
           }
         }}
-        name='Home'
+        name='Feed'
         component={Feed}
       />
       <Screen
