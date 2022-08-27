@@ -10,7 +10,7 @@ const RootNavigation = ({}) => {
   return (
     <NavigationContainer>
       <Navigator initialRouteName="Home">
-        <Screen name="Home" options={{title: 'Home'}} component={Home} />
+        <Screen name="Home" options={{title: 'Home', header: () => null}} component={Home} />
         <Screen
           name="Transactions"
           options={{title: 'Transactions'}}
@@ -23,17 +23,17 @@ const RootNavigation = ({}) => {
         />
         <Screen
           name="ViewTransaction"
-          options={{title: 'View Transaction'}}
+          options={{title: 'View Transaction', header: () => null}}
           component={ViewTransaction}
         />
           <Screen
           name="AddParticipants"
-          options={{title: 'Add Participants'}}
+          options={{title: 'Add Participants', header: () => null}}
           component={AddParticipants}
         />
           <Screen
           name="AddTransactions"
-          options={{title: 'Add Transactions'}}
+          options={{title: 'Add Transactions', header: () => null}}
           component={AddTransactions}
         />
       </Navigator>
