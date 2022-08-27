@@ -10,7 +10,7 @@ const BottomTabBar = (props: any) => {
         const { options } = descriptors[route.key];
 
         let label;
-        // const TabIcon = options.tabBarIcon;
+        const TabIcon = options.tabBarIcon;
 
         if (options.tabBarLabel) {
           label = options.tabBarLabel;
@@ -41,13 +41,13 @@ const BottomTabBar = (props: any) => {
         };
 
         const tabBarItem = (
-          <>
-            {/* <TabIcon
+          <View style={{ alignItems: 'center' }} key={index}>
+            <TabIcon
               focused={isFocused}
               color={'#311B92'}
               height={20}
               width={20}
-            /> */}
+            />
             <Text
               style={[
                 styles.tabTextStyle,
@@ -57,7 +57,7 @@ const BottomTabBar = (props: any) => {
             >
               {label}
             </Text>
-          </>
+          </View>
         );
 
         return (
