@@ -1,8 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {Keyboard, Platform} from 'react-native';
+import {Image, Keyboard, Platform} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-// import { HomeIcon, HomeActiveIcon, InvestmentIcon, InvestmentActiveIcon, TransactionsIcon, TransactionsActiveIcon, MileStoneIcon, MileStoneActiveIcon } from '../../assets/icons';
+import {
+  HomeImage,
+  HomeActiveImage,
+  InvestmentImage,
+  InvestmentActiveImage,
+  TransactionsImage,
+  TransactionsActiveImage,
+  MilestoneImage,
+  MilestoneActiveImage,
+} from '../../assets/images';
 import BottomTabBar from '../../components/BottomTabBar/BottomTabBar';
 import Dashboard from '../Dashboard/Dashboard';
 import Transactions from '../Transactions/Transactions';
@@ -29,9 +38,11 @@ function TabNavigator() {
 
   return (
     <Navigator
-      initialRouteName="Home"
+      initialRouteName="Feed"
       backBehavior="initialRoute"
-      headerMode="none"
+      screenOptions={{
+        headerShown: false,
+      }}
       // tabBarOptions={{
       //   keyboardHidesTabBar: true
       // }}
@@ -44,13 +55,12 @@ function TabNavigator() {
       <Screen
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({focused, color}) => {
-            // return focused ? (
-            //   <HomeIcon color={color} size={20} />
-            // ) : (
-            //   <HomeActiveIcon color={color} size={20} />
-            // );
-            return null;
+          tabBarIcon: ({focused}) => {
+            return focused ? (
+              <Image source={HomeActiveImage} />
+            ) : (
+              <Image source={HomeImage} />
+            );
           },
         }}
         name="Home"
@@ -59,13 +69,12 @@ function TabNavigator() {
       <Screen
         options={{
           tabBarLabel: 'Transactions',
-          tabBarIcon: ({focused, color}) => {
-            // return focused ? (
-            //   <TransactionsIcon color={color} size={20} />
-            // ) : (
-            //   <TransactionsActiveIcon color={color} size={20} />
-            // );
-            return null;
+          tabBarIcon: ({focused}) => {
+            return focused ? (
+              <Image source={TransactionsActiveImage} />
+            ) : (
+              <Image source={TransactionsImage} />
+            );
           },
         }}
         name="Transactions"
@@ -74,13 +83,12 @@ function TabNavigator() {
       <Screen
         options={{
           tabBarLabel: 'Investment',
-          tabBarIcon: ({focused, color}) => {
-            // return focused ? (
-            //   <InvestmentIcon color={color} size={20} />
-            // ) : (
-            //   <InvestmentActiveIcon color={color} size={20} />
-            // );
-            return null;
+          tabBarIcon: ({focused}) => {
+            return focused ? (
+              <Image source={InvestmentActiveImage} />
+            ) : (
+              <Image source={InvestmentImage} />
+            );
           },
         }}
         name="Investment"
@@ -89,13 +97,12 @@ function TabNavigator() {
       <Screen
         options={{
           tabBarLabel: 'Milestone',
-          tabBarIcon: ({focused, color}) => {
-            // return focused ? (
-            //   <MileStoneIcon color={color} size={20} />
-            // ) : (
-            //   <MileStoneActiveIcon color={color} size={20} />
-            // );
-            return null;
+          tabBarIcon: ({focused}) => {
+            return focused ? (
+              <Image source={MilestoneActiveImage} />
+            ) : (
+              <Image source={MilestoneImage} />
+            );
           },
         }}
         name="Milestone"
