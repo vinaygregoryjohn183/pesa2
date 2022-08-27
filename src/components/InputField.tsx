@@ -1,33 +1,35 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
+import {signUpFieldsEnum} from '../constants/signUp';
 
 interface InputFieldProps {
   label: string;
+  data: {};
+  setData: (label, value) => void;
 }
 
 export const InputField = (props: InputFieldProps) => {
-  const {label} = props;
+  const {label, data, setData} = props;
 
   const [isFocussed, setIsFocussed] = useState(false);
-  const [inputValue, setInputValue] = useState('');
   return (
     <View>
-      {isFocussed || inputValue != '' ? (
-        <Text style={styles.focussedLabelText}>{label}</Text>
+      {isFocussed || data[label] ? (
+        <Text style={styles.focussedLabelText}>{signUpFieldsEnum[label]}</Text>
       ) : null}
 
       <TextInput
-        value={inputValue}
+        value={data[label]}
         keyboardType={
-          label === 'Age' || label === 'Annual Income' ? 'numeric' : undefined
+          label === 'age' || label === 'annualIncome' ? 'numeric' : undefined
         }
         selectionColor="#3F60A6"
-        placeholder={isFocussed ? '' : label}
+        placeholder={isFocussed ? '' : signUpFieldsEnum[label]}
         style={[
-          label !== 'Name' ? styles.fixedWidth : {},
+          label !== 'name' ? styles.fixedWidth : {},
           styles.textInput,
-          isFocussed || inputValue != '' ? styles.textInputFocussed : {},
+          isFocussed || data[label] ? styles.textInputFocussed : {},
         ]}
         onFocus={() => {
           setIsFocussed(true);
@@ -36,7 +38,7 @@ export const InputField = (props: InputFieldProps) => {
           setIsFocussed(false);
         }}
         onChange={e => {
-          setInputValue(e.nativeEvent.text);
+          setData(label, e.nativeEvent.text);
         }}
       />
     </View>
@@ -64,5 +66,5 @@ const styles = StyleSheet.create({
   },
   fixedWidth: {
     width: '60%',
-  },
+  }
 });
