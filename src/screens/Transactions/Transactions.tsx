@@ -35,8 +35,11 @@ const dummyTransactionList: TransactionListProps[] = [
 
 const Transactions = ({navigation}: {navigation: any}) => {
 
-  const onViewTransaction = () => {
-    navigation.navigate('ViewTransaction');
+  const onViewTransaction = (type: any) => {
+    type === 'SMS' ?
+    navigation.navigate('ViewTransaction') :
+    navigation.navigate('AddTransactions')
+    ;
   };
 
   return (
@@ -46,7 +49,7 @@ const Transactions = ({navigation}: {navigation: any}) => {
       colors={['rgba(255, 255, 255, 0.8)', '#8082ED']}>
        <View style={{ height: '100%' }} >
       {dummyTransactionList.map(transaction => (
-        <Pressable style={styles.card} onPress={onViewTransaction}>
+        <Pressable style={styles.card} onPress={() => onViewTransaction(transaction.type)}>
           <View style={styles.detail}>
             <Text style={styles.paidToText}>{transaction.paidTo}</Text>
             <Text style={styles.amount}>{transaction.amount}</Text>

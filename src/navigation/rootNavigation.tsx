@@ -5,7 +5,7 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 
-import {Home, Transactions, ViewTransaction} from '../screens';
+import {Home, Transactions, ViewTransaction, AddParticipants, AddTransactions} from '../screens';
 
 const RootNavigation = ({}) => {
   const {Screen, Navigator} = createStackNavigator();
@@ -22,6 +22,16 @@ const RootNavigation = ({}) => {
           name="ViewTransaction"
           options={{title: 'View Transaction'}}
           component={ViewTransaction}
+        />
+          <Screen
+          name="AddParticipants"
+          options={{title: 'Add Participants'}}
+          component={AddParticipants}
+        />
+          <Screen
+          name="AddTransactions"
+          options={{title: 'Add Transactions'}}
+          component={AddTransactions}
         />
       </Navigator>
     </NavigationContainer>
