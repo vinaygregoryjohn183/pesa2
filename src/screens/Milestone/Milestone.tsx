@@ -1,18 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { RadioButton } from 'react-native-radio-buttons-group';
 
 import styles from './styles';
 
-enum MilestonePeriods {
-    Weekly = 'Weekly',
-    Monthly = 'Monthly'
-}
-
 const Milestone = () => {
-    const [budget, setBudget] = useState('');
-    const [period, setPeriod] = useState<MilestonePeriods>(MilestonePeriods.Weekly);
+  const [currentMilestone, setCurrentmilestone] = useState<any>({});
+  const [amountAchieved, setAmountAchieved] = useState();
+
+  const getMilestones = async () => {
+    console.log('fetching.....');
+    const currMile = await fetch('https://211b-103-142-31-94.in.ngrok.io/api/v1/milestone/current-milestone/d89e855f-11a9-454e-ac83-51b28cb820be', { method: 'GET' });
+    return currMile.json();
+  };
+
+  const getUserSummary = async () => {
+    console.log('fetching.....');
+    const userSummary = await fetch('https://211b-103-142-31-94.in.ngrok.io/api/v1/user/summary?userId=d89e855f-11a9-454e-ac83-51b28cb820be&milestoneId=037bcbb5-0015-4c62-a205-29013b74c006', { method: 'GET' });
+    return userSummary.json();
+  };
+
+  useEffect(() => {
+      getMilestones().then(data => {
+        setCurrentmilestone({
+          type: data.type,
+          amount: data.amount
+        });
+      });
+      getUserSummary().then(data => {
+        setAmountAchieved(data.totalSpend);
+      });
+  }, []);
 
     return (
     <View>
@@ -22,13 +40,25 @@ const Milestone = () => {
         colors={['rgba(255, 255, 255, 0)', '#8082EA']}
         style={styles.container}
       >
-        <View style={styles.innerContainer}>
-          <Text style={styles.label}>Period</Text>
-          <RadioButton id={MilestonePeriods.Weekly} color="#6264FF" label="Weekly" size={15} containerStyle={{ marginLeft: 0, marginTop: 12 }} labelStyle={styles.radioLabel} onPress={() => setPeriod(MilestonePeriods.Weekly)} selected={period === MilestonePeriods.Weekly} />
-          <RadioButton id={MilestonePeriods.Monthly} color="#6264FF" label="Monthly" size={15} containerStyle={{ marginLeft: 0, marginBottom: 30 }} labelStyle={styles.radioLabel} onPress={() => setPeriod(MilestonePeriods.Monthly)} selected={period === MilestonePeriods.Monthly} />
-
-          <Text style={styles.label}>Maximum Spend limit</Text>
-          <TextInput placeholder="Enter your budget" selectionColor="#3F60A6" value={budget}  onChange={(e) => setBudget(e.nativeEvent.text)} style={{ borderBottomColor: '#2B4985', borderBottomWidth: 1, width: '40%', padding: 0 }} />
+        <Text style={styles.title}>Milestone</Text>
+        <View style={{ backgroundColor: 'white', borderRadius: 10, paddingVertical: 16, paddingHorizontal: 19}}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text style={styles.title2}>{currentMilestone.type}</Text>
+            <View style={{ flexDirection: 'row' }}>
+              {/* <View>
+                <Text style={{ fontSize: 10, color: '#535353', fontWeight: '400' }}>Start Date</Text>
+                <Text style={{ fontSize: 12, color: '#1B1B1B', fontWeight: '500' }}>1/8/2022</Text>
+              </View>
+              <View style={{ marginLeft: 10 }}>
+                <Text style={{ fontSize: 10, color: '#535353', fontWeight: '400' }}>End Date</Text>
+                <Text style={{ fontSize: 12, color: '#1B1B1B', fontWeight: '500' }}>19/8/2022</Text>
+              </View> */}
+            </View>
+          </View>
+          <Text style={{ fontSize: 11, color: '#535353', marginTop: 13, marginBottom: 5, fontWeight: '500' }}>Target</Text>
+            <Text style={{ fontSize: 15, color: '#6264FF', marginBottom: 14, fontWeight: '700' }}>{currentMilestone.amount}</Text>
+            <Text style={{ fontSize: 11, color: '#535353', marginTop: 13, marginBottom: 5, fontWeight: '500' }}>Achieved</Text>
+            <Text style={{ fontSize: 15, color: '#6264FF', marginBottom: 14, fontWeight: '700' }}>{amountAchieved}</Text>
         </View>
       </LinearGradient>
     </View>

@@ -4,8 +4,7 @@ export const styles = StyleSheet.create({
  container: {
     height: '100%',
     width: '100%',
-    backgroundColor: 'white',
-    padding: 15
+    backgroundColor: 'white'
  },
  innerContainer: {
     height: '80%',
@@ -17,19 +16,18 @@ export const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingVertical: 31
  },
- title: {
-    fontWeight: '700',
-    fontSize: 16,
+ label: {
+    fontWeight: '500',
+    fontSize: 14,
     lineHeight: 16,
     color: 'black',
-    marginBottom: 48
+    marginBottom: 0
   },
-  title2: {
-   fontWeight: '700',
-   fontSize: 15,
-   lineHeight: 24,
-   color: 'black'
- }
+  radioLabel: {
+    color: 'black',
+    fontSize: 14,
+    lineHeight: 16
+  }
 });
 
 export default styles;
