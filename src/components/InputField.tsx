@@ -10,21 +10,33 @@ export const InputField = (props: InputFieldProps) => {
   const {label} = props;
 
   const [isFocussed, setIsFocussed] = useState(false);
+  const [inputValue, setInputValue] = useState('');
   return (
     <View>
-      {isFocussed ? (
+      {isFocussed || inputValue != '' ? (
         <Text style={styles.focussedLabelText}>{label}</Text>
       ) : null}
 
       <TextInput
+        value={inputValue}
+        keyboardType={
+          label === 'Age' || label === 'Annual Income' ? 'numeric' : undefined
+        }
         selectionColor="#3F60A6"
         placeholder={isFocussed ? '' : label}
-        style={[styles.textInput, isFocussed ? styles.textInputFocussed : {}]}
+        style={[
+          label !== 'Name' ? styles.fixedWidth : {},
+          styles.textInput,
+          isFocussed || inputValue != '' ? styles.textInputFocussed : {},
+        ]}
         onFocus={() => {
           setIsFocussed(true);
         }}
         onBlur={() => {
           setIsFocussed(false);
+        }}
+        onChange={e => {
+          setInputValue(e.nativeEvent.text);
         }}
       />
     </View>
@@ -49,5 +61,8 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontWeight: '500',
     fontSize: 14,
+  },
+  fixedWidth: {
+    width: '60%',
   },
 });

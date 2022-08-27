@@ -1,5 +1,6 @@
 import React, {ReactNode} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
+import {CustomeLinearGradient} from './CustomLinearGradient';
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -9,10 +10,12 @@ interface PageLayoutProps {
 export const PageLayout = (props: PageLayoutProps) => {
   const {children, pageLayoutStyle = {}} = props;
   return (
-    <ScrollView
-      contentContainerStyle={[styles.signUpPageContainer, pageLayoutStyle]}>
-      <View style={{flex: 1}}>{children}</View>
-    </ScrollView>
+    <CustomeLinearGradient>
+      <ScrollView
+        contentContainerStyle={[styles.signUpPageContainer, pageLayoutStyle]}>
+        <View style={{flex: 1}}>{children}</View>
+      </ScrollView>
+    </CustomeLinearGradient>
   );
 };
 

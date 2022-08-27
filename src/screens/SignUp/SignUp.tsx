@@ -7,6 +7,7 @@ export const SignUp = () => {
   const signUpFields = ['Name', 'Age', 'Occupation', 'Annual Income'];
   return (
     <PageLayout>
+      <Text style={styles.signUpTitle}>Sign Up</Text>
       <View>
         {signUpFields.map((label, index) => (
           <View
@@ -28,6 +29,11 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   inputFieldContainer: {
-    marginTop: 45,
+    marginTop: 38,
+  },
+  signUpTitle: {
+    fontWeight: '700',
+    fontSize: 16,
+    color: 'black',
   },
 });
