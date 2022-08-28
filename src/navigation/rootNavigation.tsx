@@ -2,15 +2,16 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {Home, Transactions, ViewTransaction} from '../screens';
+import {Home, Transactions, ViewTransaction, AddParticipants, AddTransactions} from '../screens';
 import {SignUp} from '../screens/SignUp/SignUp';
+import AddMilestone from '../screens/AddMilestone/AddMilestone';
 
 const RootNavigation = ({}) => {
   const {Screen, Navigator} = createStackNavigator();
   return (
     <NavigationContainer>
       <Navigator initialRouteName="Home">
-        <Screen name="Home" options={{title: 'Home'}} component={Home} />
+        <Screen name="Home" options={{title: 'Home', header: () => null}} component={Home} />
         <Screen
           name="Transactions"
           options={{title: 'Transactions'}}
@@ -23,8 +24,23 @@ const RootNavigation = ({}) => {
         />
         <Screen
           name="ViewTransaction"
-          options={{title: 'View Transaction'}}
+          options={{title: 'View Transaction', header: () => null}}
           component={ViewTransaction}
+        />
+          <Screen
+          name="AddParticipants"
+          options={{title: 'Add Participants', header: () => null}}
+          component={AddParticipants}
+        />
+          <Screen
+          name="AddTransactions"
+          options={{title: 'Add Transactions', header: () => null}}
+          component={AddTransactions}
+        />
+        <Screen
+          name="AddMilestone"
+          options={{title: 'Add Transactions', header: () => null}}
+          component={AddMilestone}
         />
       </Navigator>
     </NavigationContainer>

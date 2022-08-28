@@ -124,7 +124,7 @@ function TabNavigator() {
       />
       <Screen
         options={{
-          tabBarLabel: 'Investment',
+          tabBarLabel: 'Goals',
           tabBarIcon: ({focused}) => {
             return focused ? (
               <Image source={InvestmentActiveImage} />
@@ -133,7 +133,7 @@ function TabNavigator() {
             );
           },
         }}
-        name="Investment"
+        name="Goals"
         component={Investment}
       />
       <Screen

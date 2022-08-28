@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
+import styles from './styles';
 
 type TransactionListProps = {
   paidTo: string;
@@ -31,71 +34,61 @@ const dummyTransactionList: TransactionListProps[] = [
 ];
 
 const Transactions = ({navigation}: {navigation: any}) => {
-  console.log('transactions');
-
-  const onViewTransaction = () => {
-    navigation.navigate('ViewTransaction');
+  const [transactions, setTransactions] = useState<any>({});
+  const onViewTransaction = (type: any) => {
+    type === 'SMS' ?
+    navigation.navigate('ViewTransaction') :
+    navigation.navigate('AddTransactions')
+    ;
   };
 
+  const getCurrentMilestone = async () => {
+    console.log('fetching.....');
+    const currMile = await fetch('https://211b-103-142-31-94.in.ngrok.io/api/v1/milestone/current-milestone/d89e855f-11a9-454e-ac83-51b28cb820be', { method: 'GET' });
+    return currMile.json();
+  };
+
+  const getTransactions = async (milestoneId: string) => {
+    console.log('fetching.....');
+    const currMile = await fetch(`https://211b-103-142-31-94.in.ngrok.io/api/v1/transaction/milestone/${milestoneId}`, { method: 'GET' });
+    return currMile.json();
+  };
+
+  useEffect(() => {
+    getCurrentMilestone().then(data => {
+        getTransactions(data.id).then((resp) => {
+          setTransactions(resp);
+        });
+      });
+  }, []);
+
   return (
-    <>
-      {dummyTransactionList.map(transaction => (
-        <Pressable style={styles.card} onPress={onViewTransaction}>
+     <LinearGradient
+      start={{x: 0, y: 0}}
+      end={{x: 1, y: 1}}
+      colors={['rgba(255, 255, 255, 0.8)', '#8082ED']}>
+       <View style={{ height: '100%' }}>
+      {transactions && transactions.length ? transactions?.map((transaction, index) => (
+        <Pressable style={styles.card} onPress={() => onViewTransaction('MANUAL')} key={index}>
           <View style={styles.detail}>
-            <Text style={styles.paidToText}>{transaction.paidTo}</Text>
-            <Text style={styles.amount}>{transaction.amount}</Text>
+            <Text style={styles.paidToText}>{transaction?.title}</Text>
+            <Text style={styles.amount}>{transaction?.amount}</Text>
           </View>
           <View style={styles.detail}>
-            <Text style={styles.date}>{transaction.date}</Text>
-            <Text
+            <Text style={styles.date}>{new Date(transaction?.createdAt)?.toDateString()}</Text>
+            {/* <Text
               style={[
                 styles.type,
                 {color: transaction.type === 'SMS' ? '#9A5C00' : '#600278'},
               ]}>
               {transaction.type}
-            </Text>
+            </Text> */}
           </View>
         </Pressable>
-      ))}
-    </>
+      )) : null}
+      </View>
+      </LinearGradient>
   );
 };
 
 export default Transactions;
-
-const styles = StyleSheet.create({
-  card: {
-    padding: 16,
-    margin: 16,
-    backgroundColor: 'white',
-    borderRadius: 12,
-    marginBottom: 0,
-  },
-  detail: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  paidToText: {
-    fontSize: 15,
-    lineHeight: 16,
-    fontWeight: '700',
-    color: 'black',
-  },
-  amount: {
-    fontSize: 15,
-    lineHeight: 24,
-    fontWeight: '700',
-    color: '#004BE7',
-  },
-  date: {
-    fontSize: 11,
-    lineHeight: 16,
-    fontWeight: '400',
-    color: '#535353',
-  },
-  type: {
-    fontSize: 11,
-    lineHeight: 16,
-    fontWeight: '400',
-  },
-});
