@@ -7,9 +7,33 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
  },
+ box1: {
+    height:10,
+    width: 10,
+    backgroundColor: '#6398E9',
+    marginHorizontal: 10
+ },
+ box2: {
+    height:10,
+    width: 10,
+    backgroundColor: '#C35BA0',
+    marginHorizontal: 10
+ },
+ box3: {
+    height:10,
+    width: 10,
+    backgroundColor: '#00C27C',
+    marginHorizontal: 10
+ },
+ box4: {
+    height:10,
+    width: 10,
+    backgroundColor: '#E5C646',
+    marginHorizontal: 10
+ },
  pieChartContainer: {
     backgroundColor: '#FFFFFF',
-    height: 368,
+    height: 450,
     width: 300,
     borderRadius: 10,
     justifyContent: 'center',
