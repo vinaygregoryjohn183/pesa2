@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
       fontWeight: '700',
       color: 'black',
     },
+    title: {
+        fontWeight: '700',
+        fontSize: 16,
+        lineHeight: 16,
+        color: 'black'
+      },
     amount: {
       fontSize: 15,
       lineHeight: 24,

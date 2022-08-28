@@ -6,6 +6,8 @@ import MilestoneImage from './Milestone.png';
 import MilestoneActiveImage from './Milestone.png';
 import TransactionsImage from './Transactions.png';
 import TransactionsActiveImage from './TransactionsActive.png';
+import AddImage from './Add.png';
+
 
 export {
     HomeImage,
@@ -15,5 +17,6 @@ export {
     MilestoneImage,
     MilestoneActiveImage,
     TransactionsImage,
-    TransactionsActiveImage
+    TransactionsActiveImage,
+    AddImage
 };

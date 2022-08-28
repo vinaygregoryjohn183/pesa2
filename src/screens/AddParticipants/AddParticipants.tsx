@@ -30,7 +30,7 @@ const AddParticipants = () => {
           <Text style={styles.title}>
           Participants
           </Text>
-          <TextInput style={styles.textInput} placeholder='Enter Category' maxLength={30} onChangeText={(newText) => handleParticipantsChange}/>
+          <TextInput style={styles.textInput} placeholder='Enter Participants' maxLength={30} onChangeText={(newText) => handleParticipantsChange}/>
           </View>
           <View style={{ width: '30%', marginLeft: 20, marginBottom: 20, marginTop: 25 }}>
           <Button  title="Next" color="#6264FF" />

@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Button, Text, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles'
 
-const ViewTransaction = ({navigation}: {navigation: any}) => {
+const ViewTransaction = ({navigation, route}: {navigation: any, route: any}) => {
+  const { transactionId } = route?.params;
   const onPressSplit = () => {
     navigation.navigate('AddParticipants');
   }
+  const [res, setResponse] = useState(null);
+  const getTransaction = async () => {
+    const response = await fetch(`https://211b-103-142-31-94.in.ngrok.io/api/v1/transaction/${transactionId}`, { method: 'GET' });
+    return response.json();
+  };
+  useEffect(() => {
+      console.log(getTransaction().then(data => {console.log('data', data), setResponse(data);}));
+  }, []);
   return (
     <LinearGradient
     start={{x: 0, y: 0}}
@@ -21,19 +30,19 @@ const ViewTransaction = ({navigation}: {navigation: any}) => {
             Paid to
           </Text>
           <Text style={styles.subText}>
-           SWIGGY
+           {res?.title}
           </Text>
           <Text style={styles.title}>
           Date
           </Text>
           <Text style={styles.subText}>
-          24 August 2022 
+          27 August 2022 
           </Text>
           <Text style={styles.title}>
           Amount
           </Text>
           <Text style={styles.subText}>
-          ₹ 9,000
+          ₹ {res?.amount}
           </Text>
           <Text style={styles.title}>
           Bank
@@ -45,7 +54,13 @@ const ViewTransaction = ({navigation}: {navigation: any}) => {
           Transaction id
           </Text>
           <Text style={styles.subText}>
-          233112237887
+          {res?.id}
+          </Text>
+          <Text style={styles.title}>
+          Category
+          </Text>
+          <Text style={styles.subText}>
+          {res?.category}
           </Text>
           </View>
           <TouchableOpacity style={styles.touchOpacity} onPress={onPressSplit}>

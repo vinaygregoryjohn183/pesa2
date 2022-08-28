@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, Image, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { AddImage } from '../../assets/images';
 
 import styles from './styles';
 
@@ -35,10 +36,13 @@ const dummyTransactionList: TransactionListProps[] = [
 
 const Transactions = ({navigation}: {navigation: any}) => {
   const [transactions, setTransactions] = useState<any>({});
-  const onViewTransaction = (type: any) => {
-    type === 'SMS' ?
-    navigation.navigate('ViewTransaction') :
-    navigation.navigate('AddTransactions')
+  const onViewTransaction = (id: any) => {
+    navigation.navigate('ViewTransaction', {transactionId: id });
+    ;
+  };
+
+  const onPressAdd = () => {
+    navigation.navigate('AddTransactions');
     ;
   };
 
@@ -68,8 +72,16 @@ const Transactions = ({navigation}: {navigation: any}) => {
       end={{x: 1, y: 1}}
       colors={['rgba(255, 255, 255, 0.8)', '#8082ED']}>
        <View style={{ height: '100%' }}>
-      {transactions && transactions.length ? transactions?.map((transaction, index) => (
-        <Pressable style={styles.card} onPress={() => onViewTransaction('MANUAL')} key={index}>
+         <View style={{ marginTop: 20, marginLeft: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+         <Text style={styles.title}>Transactions</Text>
+         <Pressable style={{ marginRight: 15, backgroundColor: '#ffffff', borderRadius: 10, padding: 3}} onPress={onPressAdd}>
+         <Image source={AddImage} />
+         </Pressable>
+         </View>
+      {transactions && transactions.length ? transactions?.map((transaction, index) => {
+        const id = transaction.id
+        return(
+        <Pressable style={styles.card} onPress={() => onViewTransaction(id)} key={index}>
           <View style={styles.detail}>
             <Text style={styles.paidToText}>{transaction?.title}</Text>
             <Text style={styles.amount}>{transaction?.amount}</Text>
@@ -85,7 +97,7 @@ const Transactions = ({navigation}: {navigation: any}) => {
             </Text> */}
           </View>
         </Pressable>
-      )) : null}
+      )}) : null}
       </View>
       </LinearGradient>
   );
