@@ -86,6 +86,9 @@ title: {
     textAlign: 'center',
     marginBottom: 25
 },
+categoryText: {
+    color: '#000000'
+}
 });
 
 export default styles;
