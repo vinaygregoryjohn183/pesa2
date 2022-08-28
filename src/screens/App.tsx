@@ -23,15 +23,15 @@ const App = () => {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          title: 'Swiggie',
+          title: 'Flipkart',
           userShares: [
             {
               userId: 'd89e855f-11a9-454e-ac83-51b28cb820be',
-              amount: 0,
+              amount: 2000,
             },
           ],
           milestoneId: '037bcbb5-0015-4c62-a205-29013b74c006',
-          amount: 0,
+          amount: 2000,
           shareType: 'EQUALLY',
           paidBy: 'd89e855f-11a9-454e-ac83-51b28cb820be',
           category: 'CLOTHES',
