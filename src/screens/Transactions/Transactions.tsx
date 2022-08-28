@@ -61,7 +61,7 @@ const Transactions = ({navigation}: {navigation: any}) => {
   useEffect(() => {
     getCurrentMilestone().then(data => {
         getTransactions(data.id).then((resp) => {
-          setTransactions(resp);
+          setTransactions(resp.sort((a, b) => a.createdAt < b.createdAt));
         });
       });
   }, []);
@@ -87,7 +87,7 @@ const Transactions = ({navigation}: {navigation: any}) => {
             <Text style={styles.amount}>{transaction?.amount}</Text>
           </View>
           <View style={styles.detail}>
-            <Text style={styles.date}>{new Date(transaction?.createdAt)?.toDateString()}</Text>
+          <Text style={styles.date}>{new Date(transaction?.createdAt)?.toDateString()}</Text>
             {/* <Text
               style={[
                 styles.type,
